@@ -12,8 +12,7 @@ public class RestApplication extends Application{
 	@Override
 	public Set<Class<?>> getClasses(){
 		Set<Class<?>> classList = new HashSet<>();
-		classList.add(RecipesResources.class);
+		classList.add(UsersResources.class);
 		return classList;
 	}
-
 }
