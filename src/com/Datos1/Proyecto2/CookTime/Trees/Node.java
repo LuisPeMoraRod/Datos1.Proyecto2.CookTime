@@ -31,4 +31,8 @@ public class Node<T extends Comparable<T>> {
         this.left = left;
         this.right = right;
     }
+    
+    public T getElement() {
+    	return this.element;
+    }
 }

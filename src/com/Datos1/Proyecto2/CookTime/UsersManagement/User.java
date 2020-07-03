@@ -18,18 +18,6 @@ public class User implements Comparable<User>{
 	private BufferedImage profilePic;
 	private User[] usersFollowing;
 	private String[] followers;
-
-	public User(String email, String name, int age, String password, MyMenu myMenu, BufferedImage profilePic, User[] usersFollowing, String[] followers) {
-		super();
-		this.email = email;
-		this.name = name;
-		this.age = age;
-		this.password = password;
-		this.myMenu = myMenu;
-		this.profilePic = profilePic; 
-		this.usersFollowing = usersFollowing;
-		this.followers = followers;
-	}
 	
 	public User (Builder builder) {
 		this.email = builder.email;
@@ -168,7 +156,15 @@ public class User implements Comparable<User>{
 		if (o == null) {
 			return -1;
 		}
-		return this.email.compareTo(o.toString());
+		return this.email.compareTo(o.email.toString());
+	}
+	
+	/**
+	 * Overrided toString method so that it returns de user's email
+	 */
+	@Override
+	public String toString() {
+		return this.email;
 	}
 
 	
