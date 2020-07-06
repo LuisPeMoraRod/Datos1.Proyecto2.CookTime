@@ -3,29 +3,29 @@ package com.Datos1.Proyecto2.CookTime.JSONFiles;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import org.json.simple.parser.ParseException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-
 import com.Datos1.Proyecto2.CookTime.Trees.BinaryTree;
 import com.Datos1.Proyecto2.CookTime.UsersManagement.User;
 
 public class UsersJSON {
 	private User user;
+	private BinaryTree<User> BT;
 	private JSONArray usersArray;
-	private JSONParser jsonParser;
-	private BinaryTree<User> BT ;
-	
-
 	private static UsersJSON usersJson = null;
 
-	private UsersJSON() {
+	private UsersJSON(JSONArray usersArray) {
 		BT = BinaryTree.getInstance();
+		this.usersArray = usersArray;
+		addUsersToBT(usersArray);
 	}
-	
+
 	public BinaryTree<User> getBT() {
 		return BT;
 	}
@@ -35,61 +35,55 @@ public class UsersJSON {
 	}
 
 	/**
-	 * Singleton pattern design instantiation method 
+	 * Singleton pattern design instantiation method
+	 * 
 	 * @return usersJson : UsersJSON
 	 */
-	public static synchronized UsersJSON getInstance() {
+	public static synchronized UsersJSON getInstance(JSONArray usersArray) {
 		if (usersJson == null) {
-			usersJson = new UsersJSON();
+			usersJson = new UsersJSON(usersArray);
 		}
 		return usersJson;
 	}
 
-	
-	
 	/**
-	 * Public method. Loads to the binary tree all the users objects from the JSONArray 
+	 * Public method. Loads to the binary tree all the users objects from the
+	 * JSONArray
 	 */
 	@SuppressWarnings("unchecked")
 	public void addUsersToBT(JSONArray usersList) {
-			// Iterate over users array
-			usersList.forEach(userObj -> parseUser((JSONObject) userObj));
-	}
-
-	private void parseUser(JSONObject userObj) {
-
-		// Get user's attributes
-		String email = (String) userObj.get("email");
-		String name = (String) userObj.get("name");
-		String password = (String) userObj.get("password");
-		int age = Integer.parseInt((String) userObj.get("age"));
-		
-		this.user = User.builder().withEmail(email).withName(name).withPassword(password).withAge(age).build();
-		this.BT.insert(user);
-		
-	}
-	
-	public static void main(String[] args) {
-		UsersJSON usersJson = UsersJSON.getInstance();
-		JSONParser parser = new JSONParser();
-		JSONArray usersArray = null;
-		try {
-			usersArray = (JSONArray) parser
-					.parse(new FileReader("src/com/Datos1/Proyecto2/CookTime/Admin/users.json"));
-			
-			usersJson.addUsersToBT(usersArray);
-			System.out.println(usersJson.getBT().inOrder().toString());
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String email = null, name = null, password = null;
+		int age = 0;
+		System.out.println(usersList.getClass());
+		// usersList.forEach(user -> parseUser((JSONObject) user));
+		for (int i = 0; i < usersList.size(); i++) {
+			HashMap<String, String> passedValues = (HashMap<String, String>) usersList.get(i);
+			for (Entry<String, String> mapTemp : passedValues.entrySet()) {
+				switch (mapTemp.getKey()) {
+				case "email":
+					email = mapTemp.getValue();
+					System.out.println(email);
+					break;
+				case "name":
+					name = mapTemp.getValue();
+					System.out.println(name);
+					break;
+				case "password":
+					password = mapTemp.getValue();
+					System.out.println(password);
+					break;
+				case "age":
+					age = Integer.parseInt(mapTemp.getValue());
+					System.out.println(age);
+					break;
+				default:
+					break;
+				}
+			}
+			this.user = User.builder().withEmail(email).withName(name).withPassword(password).withAge(age).build();
+			this.BT.insert(user);
 		}
 	}
+
 
 }

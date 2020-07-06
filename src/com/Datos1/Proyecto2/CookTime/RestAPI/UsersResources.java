@@ -46,24 +46,14 @@ public class UsersResources implements RestResources {
 	private User responseUser;
 	private String key, email = null, name = null, password = null;
 	private int age;
+	private UsersJSON usersJson;
 	
 	@POST
 	@Path("/load")
-	public Response load(InputStream incomingData) {
+	public Response load(JSONArray incomingData) {
+		System.out.println(incomingData);
+		usersJson = UsersJSON.getInstance(incomingData);
 		
-		StringBuilder crunchifyBuilder = new StringBuilder();
-		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
-			String line = null;
-			while ((line = in.readLine()) != null) {
-				crunchifyBuilder.append(line);
-			}
-		} catch (Exception e) {
-			System.out.println("Error Parsing: - ");
-		}
-		System.out.println("Data Received: " + crunchifyBuilder.toString());
- 
-		// return HTTP response 200 in case of success
 		return Response.status(200).entity("JSON recieved").build();
 	}
 

@@ -20,7 +20,6 @@ public class BinaryTree<T extends Comparable<T>> {
 	private ArrayList<T> list;
 	
 	
-
 	private static BinaryTree<User> BT = null;
 
 	private BinaryTree() {

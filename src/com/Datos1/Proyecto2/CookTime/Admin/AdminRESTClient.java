@@ -5,23 +5,28 @@ package com.Datos1.Proyecto2.CookTime.Admin;
  * @version 5/7/2020
  */
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
+
 public class AdminRESTClient {
+	/**
+	 * Creates a client for rest api services.
+	 * Sends JSON 
+	 * @autohor Luis Pedro Morales Rodriguez
+	 * @version 6/7/2020
+	 */
+	
+	
 	public static void main(String[] args) {
 		JSONParser parser = new JSONParser();
 		JSONArray usersArray = null;
@@ -52,14 +57,10 @@ public class AdminRESTClient {
 			out.write(usersArray.toString());
 			out.close();
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-			while (in.readLine() != null) {
-			}
-			System.out.println("\nCrunchify REST Service Invoked Successfully..");
-			in.close();
+			//BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			//in.close();
 		} catch (Exception e) {
-			System.out.println("\nError while calling Crunchify REST Service");
+			System.out.println("\nError while calling REST Service");
 			System.out.println(e);
 		}
 
