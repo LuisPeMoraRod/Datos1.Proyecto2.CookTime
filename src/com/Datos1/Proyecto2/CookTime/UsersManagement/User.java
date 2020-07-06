@@ -3,13 +3,14 @@ package com.Datos1.Proyecto2.CookTime.UsersManagement;
 import java.awt.image.BufferedImage;
 
 
-public class User implements Comparable<User>{
+public class User implements Comparable<User> {
 	/**
 	 * User objects class
+	 * 
 	 * @author Luis Pedro Morales Rodriguez
 	 * @version 1/7/2020
 	 */
-	
+
 	private String email;
 	private String name;
 	private int age;
@@ -18,14 +19,14 @@ public class User implements Comparable<User>{
 	private BufferedImage profilePic;
 	private User[] usersFollowing;
 	private String[] followers;
-	
-	public User (Builder builder) {
+
+	public User(Builder builder) {
 		this.email = builder.email;
 		this.name = builder.name;
 		this.age = builder.age;
 		this.password = builder.password;
 		this.myMenu = builder.myMenu;
-		this.profilePic = builder.profilePic; 
+		this.profilePic = builder.profilePic;
 		this.usersFollowing = builder.usersFollowing;
 		this.followers = builder.followers;
 	}
@@ -62,15 +63,19 @@ public class User implements Comparable<User>{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public MyMenu getProfile() {
 		return myMenu;
 	}
+
 	public void setProfile(MyMenu myMenu) {
 		this.myMenu = myMenu;
 	}
+
 	public BufferedImage getProfilePic() {
 		return profilePic;
 	}
+
 	public void setProfilePic(BufferedImage profilePic) {
 		this.profilePic = profilePic;
 	}
@@ -90,12 +95,12 @@ public class User implements Comparable<User>{
 	public void setFollowers(String[] followers) {
 		this.followers = followers;
 	}
-	
+
 	public static Builder builder() {
 		return new Builder();
-	} 
-	
-	public static class Builder{
+	}
+
+	public static class Builder {
 		private String email;
 		private String name;
 		private int age;
@@ -104,51 +109,51 @@ public class User implements Comparable<User>{
 		private BufferedImage profilePic;
 		private User[] usersFollowing;
 		private String[] followers;
-		
+
 		public User build() {
 			return new User(this);
 		}
-		
+
 		public Builder withEmail(String email) {
 			this.email = email;
 			return this;
 		}
-		
+
 		public Builder withName(String name) {
 			this.name = name;
 			return this;
 		}
-		
+
 		public Builder withAge(int age) {
 			this.age = age;
 			return this;
 		}
-		
+
 		public Builder withPassword(String password) {
 			this.password = password;
 			return this;
 		}
-		
-		public Builder withMyMenu (MyMenu myMenu) {
+
+		public Builder withMyMenu(MyMenu myMenu) {
 			this.myMenu = myMenu;
 			return this;
 		}
-		
+
 		public Builder withProfilePic(BufferedImage profilePic) {
 			this.profilePic = profilePic;
 			return this;
 		}
-		
-		public Builder withUsersFollowing (User[] usersFollowing) {
+
+		public Builder withUsersFollowing(User[] usersFollowing) {
 			this.usersFollowing = usersFollowing;
 			return this;
 		}
-		
-		public Builder withFollowers (String [] followers) {
+
+		public Builder withFollowers(String[] followers) {
 			this.followers = followers;
 			return this;
 		}
-		
+
 	}
 
 	@Override
@@ -158,7 +163,7 @@ public class User implements Comparable<User>{
 		}
 		return this.email.compareTo(o.email.toString());
 	}
-	
+
 	/**
 	 * Overrided toString method so that it returns de user's email
 	 */
@@ -168,5 +173,4 @@ public class User implements Comparable<User>{
 	}
 
 	
-
 }

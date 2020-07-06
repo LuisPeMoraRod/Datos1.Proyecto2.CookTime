@@ -69,7 +69,7 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	/**
 	 * This method works as an auxiliary for the public contains method and in this
-	 * way the root can remain unaccessed by the user.
+	 * way the root can remain inaccessible by the user.
 	 *
 	 * @param element is the elements to be found
 	 * @param node    the node that the element is being compare to
@@ -92,6 +92,11 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 	}
 	
+	/**
+	 * Returns a user object. Searches the user by its email
+	 * @param email : String
+	 * @return element : T
+	 */
 	public T getUserByEmail(String email) {
 		return getUserByEmail(email, this.root);
 	}
@@ -286,5 +291,7 @@ public class BinaryTree<T extends Comparable<T>> {
 		inOrder(list, node.right);
 		
 	}
+	
+	
 
 }
